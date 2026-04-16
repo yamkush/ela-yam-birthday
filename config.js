@@ -6,13 +6,13 @@ const CONFIG = {
     title: "יום הולדת",
 
     // Subtitle (yellow text)
-    subtitle: "מסיבת גיל",
+    subtitle: "מסיבת גיל מבוגר",
 
     // Date display (red text)
     dateText: "2.5.2026",
 
     // Bottom text (purple text)
-    bottomText: "חגיגת מאורבות",
+    bottomText: "חגיגת מטורפות",
 
     // Countdown target date (YYYY-MM-DD format)
     countdownDate: "2026-05-02",
