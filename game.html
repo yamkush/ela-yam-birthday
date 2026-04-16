@@ -242,29 +242,46 @@
             animation: shake 0.6s ease;
         }
 
-        /* Navigate button */
-        .next-btn {
-            display: none;
-            margin-top: 2rem;
-            padding: 1rem 2.5rem;
-            font-family: 'Press Start 2P', monospace;
-            font-size: 0.8rem;
-            background: linear-gradient(135deg, #6633ff, #ff2200);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            animation: pulse 1.5s ease-in-out infinite;
-            transition: transform 0.2s;
+        /* To Be Continued overlay */
+        .tbc-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: #000;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease;
         }
 
-        .next-btn:hover { transform: scale(1.1); }
+        .tbc-overlay.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
 
-        .next-btn.visible { display: inline-block; }
+        .tbc-text {
+            font-family: 'Press Start 2P', monospace;
+            font-size: clamp(1.2rem, 4vw, 2.5rem);
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            animation: tbc-flicker 2s ease-in-out infinite alternate;
+        }
 
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 10px rgba(102, 51, 255, 0.5); }
-            50% { box-shadow: 0 0 25px rgba(255, 34, 0, 0.7); }
+        .tbc-arrow {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 2rem;
+            animation: blink 1s ease-in-out infinite;
+        }
+
+        @keyframes tbc-flicker {
+            from { text-shadow: 0 0 10px rgba(255, 255, 255, 0.2); }
+            to { text-shadow: 0 0 30px rgba(255, 255, 255, 0.5), 0 0 60px rgba(255, 255, 255, 0.2); }
         }
 
         /* Floating particles */
@@ -317,16 +334,18 @@
             Let's Do This Shit!
         </div>
 
-        <button class="next-btn" id="nextBtn" onclick="window.location.href='index.html'">
-            !יאללה
-        </button>
+    </div>
+
+    <div class="tbc-overlay" id="tbcOverlay">
+        <div class="tbc-text">To Be Continued...</div>
+        <div class="tbc-arrow">▶ ▶ ▶</div>
     </div>
 
     <script>
         const yamWrap = document.getElementById('yamWrap');
         const yamBubble = document.getElementById('yamBubble');
         const clickHint = document.getElementById('clickHint');
-        const nextBtn = document.getElementById('nextBtn');
+        const tbcOverlay = document.getElementById('tbcOverlay');
         const confettiContainer = document.getElementById('confetti');
 
         // Show Yam (greyed out) after ELA speaks
@@ -350,10 +369,13 @@
                 yamBubble.classList.add('visible');
                 launchConfetti();
 
-                // Show next button
+                // Show "To Be Continued" overlay after 1.5s, then redirect after 3s
                 setTimeout(() => {
-                    nextBtn.classList.add('visible');
-                }, 1000);
+                    tbcOverlay.classList.add('visible');
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 3000);
+                }, 1500);
             }, 400);
         });
 
