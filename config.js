@@ -6,7 +6,7 @@ const CONFIG = {
     title: "יום הולדת",
 
     // Subtitle (yellow text)
-    subtitle: "מסיבת גיל מבוגר",
+    subtitle: "מסיבת חצר",
 
     // Date display (red text)
     dateText: "2.5.2026",
