@@ -188,6 +188,32 @@
             }
         }
 
+        /* Time text */
+        .time-text {
+            font-family: 'Rubik Bubbles', 'Heebo', sans-serif;
+            font-size: clamp(1.5rem, 3.5vw, 3rem);
+            color: #00bfff;
+            text-shadow:
+                0 0 15px rgba(0, 191, 255, 0.5),
+                0 0 30px rgba(0, 191, 255, 0.3);
+            margin-top: 0.5rem;
+            animation: glow-blue 2s ease-in-out infinite alternate;
+            animation-delay: 1.2s;
+        }
+
+        @keyframes glow-blue {
+            from {
+                text-shadow:
+                    0 0 15px rgba(0, 191, 255, 0.5),
+                    0 0 30px rgba(0, 191, 255, 0.3);
+            }
+            to {
+                text-shadow:
+                    0 0 25px rgba(0, 191, 255, 0.7),
+                    0 0 50px rgba(0, 191, 255, 0.5);
+            }
+        }
+
         /* Countdown */
         .countdown {
             display: flex;
@@ -349,6 +375,8 @@
 
         <p class="bottom-text" id="bottomText"></p>
 
+        <p class="time-text" id="timeText"></p>
+
         <div class="emoji-row" id="bottomEmojis"></div>
     </div>
 
@@ -359,6 +387,7 @@
         document.getElementById('subtitle').textContent = CONFIG.subtitle;
         document.getElementById('dateText').textContent = CONFIG.dateText;
         document.getElementById('bottomText').textContent = CONFIG.bottomText;
+        document.getElementById('timeText').textContent = CONFIG.timeText;
         document.getElementById('avatar').src = CONFIG.avatarSrc;
         document.getElementById('yamAvatar').src = CONFIG.yamAvatarSrc;
         document.getElementById('topEmojis').textContent = CONFIG.topEmojis;

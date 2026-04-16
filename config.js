@@ -12,7 +12,10 @@ const CONFIG = {
     dateText: "2.5.2026",
 
     // Bottom text (purple text)
-    bottomText: "חגיגת מטורפות",
+    bottomText: "איפה? מושב עופר",
+
+    // Time text (below bottom text)
+    timeText: "12:00-24:00",
 
     // Countdown target date (YYYY-MM-DD format)
     countdownDate: "2026-05-02",
