@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Flier</title>
+    <script src="config.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;900&family=Rubik+Bubbles&family=Press+Start+2P&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(180deg, #0a0a2e 0%, #1a0a3e 40%, #0a0a2e 100%);
+            color: #fff;
+            font-family: 'Heebo', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Static confetti dots */
+        .dot {
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        /* Stars */
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #fff;
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 3vh 3vw;
+            text-align: center;
+        }
+
+        .top-emojis {
+            font-size: 5vh;
+            margin-bottom: 1.5vh;
+        }
+
+        .avatars {
+            display: flex;
+            gap: 4vw;
+            margin-bottom: 2vh;
+        }
+
+        .avatar-card {
+            text-align: center;
+        }
+
+        .avatar-card img {
+            width: 22vh;
+            height: 22vh;
+            border-radius: 2vh;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            object-fit: cover;
+        }
+
+        .avatar-label {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 1.8vh;
+            color: #c8b400;
+            margin-top: 1vh;
+            text-shadow: 0 0 10px rgba(200, 180, 0, 0.5);
+        }
+
+        .title {
+            font-family: 'Rubik Bubbles', sans-serif;
+            font-size: 9vh;
+            color: #00ff66;
+            text-shadow:
+                0 0 30px rgba(0, 255, 102, 0.6),
+                0 0 60px rgba(0, 255, 102, 0.3);
+            margin-bottom: 0.5vh;
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-family: 'Rubik Bubbles', sans-serif;
+            font-size: 6vh;
+            color: #c8b400;
+            text-shadow:
+                0 0 20px rgba(200, 180, 0, 0.5),
+                0 0 40px rgba(200, 180, 0, 0.3);
+            margin-bottom: 2vh;
+        }
+
+        .date {
+            font-family: 'Rubik Bubbles', sans-serif;
+            font-size: 8.5vh;
+            color: #ff2200;
+            text-shadow:
+                0 0 25px rgba(255, 34, 0, 0.6),
+                0 0 50px rgba(255, 34, 0, 0.3);
+            margin-bottom: 2vh;
+        }
+
+        .info-line {
+            font-family: 'Rubik Bubbles', sans-serif;
+            font-size: 5vh;
+            color: #6633ff;
+            text-shadow:
+                0 0 20px rgba(102, 51, 255, 0.5),
+                0 0 40px rgba(102, 51, 255, 0.3);
+            margin-bottom: 0.5vh;
+        }
+
+        .time-line {
+            font-family: 'Rubik Bubbles', sans-serif;
+            font-size: 4.5vh;
+            color: #00bfff;
+            text-shadow:
+                0 0 20px rgba(0, 191, 255, 0.5),
+                0 0 40px rgba(0, 191, 255, 0.3);
+            margin-bottom: 2vh;
+        }
+
+        .bottom-emojis {
+            font-size: 5vh;
+            margin-top: 1vh;
+        }
+
+        .url-line {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 1.4vh;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 2vh;
+            letter-spacing: 1px;
+        }
+
+        /* Decorative border */
+        .border-glow {
+            position: absolute;
+            top: 1.5vh; left: 1.5vh;
+            right: 1.5vh; bottom: 1.5vh;
+            border: 3px solid rgba(255, 255, 255, 0.08);
+            border-radius: 2vh;
+            pointer-events: none;
+        }
+
+        /* Download button */
+        .download-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            padding: 12px 24px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 14px;
+            background: linear-gradient(135deg, #00ff66, #00bfff);
+            color: #000;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(0, 255, 102, 0.5);
+            transition: transform 0.2s;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+        }
+
+        @media print {
+            .download-btn { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <button class="download-btn" id="downloadBtn">💾 Download JPEG</button>
+    <div class="border-glow"></div>
+
+    <div class="content">
+        <div class="top-emojis" id="topEmojis"></div>
+
+        <div class="avatars">
+            <div class="avatar-card">
+                <img id="ellaAvatar" src="" alt="ELLA">
+                <div class="avatar-label">ELLA</div>
+            </div>
+            <div class="avatar-card">
+                <img id="yamAvatar" src="" alt="YAM">
+                <div class="avatar-label">YAM</div>
+            </div>
+        </div>
+
+        <div class="title" id="title"></div>
+        <div class="subtitle" id="subtitle"></div>
+        <div class="date" id="dateText"></div>
+        <div class="info-line" id="bottomText"></div>
+        <div class="time-line" id="timeText"></div>
+
+        <div class="bottom-emojis" id="bottomEmojis"></div>
+
+        <div class="url-line">yamkush.github.io/ela-yam-birthday</div>
+    </div>
+
+    <script>
+        // Populate from config
+        document.getElementById('topEmojis').textContent = CONFIG.topEmojis;
+        document.getElementById('bottomEmojis').textContent = CONFIG.bottomEmojis;
+        document.getElementById('title').textContent = CONFIG.title;
+        document.getElementById('subtitle').textContent = CONFIG.subtitle;
+        document.getElementById('dateText').textContent = CONFIG.dateText;
+        document.getElementById('bottomText').textContent = CONFIG.bottomText;
+        document.getElementById('timeText').textContent = CONFIG.timeText;
+        document.getElementById('ellaAvatar').src = CONFIG.avatarSrc;
+        document.getElementById('yamAvatar').src = CONFIG.yamAvatarSrc;
+
+        // Generate static decorative dots
+        const body = document.body;
+        const colors = ['#00ff66', '#c8b400', '#ff2200', '#6633ff', '#ff69b4', '#00bfff', '#ffd700'];
+
+        for (let i = 0; i < 80; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'dot';
+            const size = Math.random() * 14 + 4;
+            dot.style.width = size + 'px';
+            dot.style.height = size + 'px';
+            dot.style.background = colors[Math.floor(Math.random() * colors.length)];
+            dot.style.left = Math.random() * 100 + '%';
+            dot.style.top = Math.random() * 100 + '%';
+            dot.style.opacity = 0.3 + Math.random() * 0.4;
+            body.appendChild(dot);
+        }
+
+        // Stars
+        for (let i = 0; i < 60; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.opacity = 0.2 + Math.random() * 0.5;
+            body.appendChild(star);
+        }
+
+        // Convert an img src to a data URL via canvas
+        async function toDataURL(imgEl) {
+            const res = await fetch(imgEl.src);
+            const blob = await res.blob();
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.readAsDataURL(blob);
+            });
+        }
+
+        // Download as JPEG
+        document.getElementById('downloadBtn').addEventListener('click', async () => {
+            const btn = document.getElementById('downloadBtn');
+            btn.textContent = '⏳ Preparing...';
+            btn.disabled = true;
+
+            // Replace SVG srcs with inline data URLs so html2canvas can render them
+            const ellaImg = document.getElementById('ellaAvatar');
+            const yamImg = document.getElementById('yamAvatar');
+            const ellaOrigSrc = ellaImg.src;
+            const yamOrigSrc = yamImg.src;
+
+            try {
+                ellaImg.src = await toDataURL(ellaImg);
+                yamImg.src = await toDataURL(yamImg);
+
+                // Wait a frame for images to update
+                await new Promise(r => setTimeout(r, 100));
+
+                btn.style.display = 'none';
+
+                const canvas = await html2canvas(document.body, {
+                    backgroundColor: '#0a0a2e',
+                    scale: 2,
+                    useCORS: true,
+                    allowTaint: true,
+                    logging: false,
+                });
+
+                // Use Blob + object URL instead of data URL — data URL downloads
+                // fail silently on mobile Safari and on Firefox when the anchor
+                // isn't attached to the DOM.
+                const blob = await new Promise((resolve, reject) => {
+                    canvas.toBlob(
+                        (b) => (b ? resolve(b) : reject(new Error('toBlob returned null'))),
+                        'image/jpeg',
+                        0.92,
+                    );
+                });
+
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.download = 'birthday-flier.jpg';
+                link.href = url;
+                link.rel = 'noopener';
+                document.body.appendChild(link);
+                link.click();
+                setTimeout(() => {
+                    link.remove();
+                    URL.revokeObjectURL(url);
+                }, 1000);
+            } catch (err) {
+                console.error('Download failed:', err);
+                alert('Download failed: ' + err.message);
+            } finally {
+                ellaImg.src = ellaOrigSrc;
+                yamImg.src = yamOrigSrc;
+                btn.style.display = '';
+                btn.textContent = '💾 Download JPEG';
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
