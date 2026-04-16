@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Game</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;900&family=Rubik+Bubbles&family=Press+Start+2P&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: #0a0a2e;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .scene {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        /* Speech bubble */
+        .speech-bubble {
+            position: relative;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            font-family: 'Press Start 2P', monospace;
+            font-size: clamp(0.7rem, 2vw, 1rem);
+            line-height: 2;
+            color: #00ff66;
+            text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeIn 0.8s ease forwards 0.5s;
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 15px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Character containers */
+        .characters {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .character {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .character img {
+            width: 180px;
+            height: 180px;
+            border-radius: 16px;
+            border: 3px solid rgba(255, 255, 255, 0.15);
+            image-rendering: pixelated;
+            object-fit: cover;
+        }
+
+        .character-name {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.9rem;
+            color: #c8b400;
+            text-shadow: 0 0 8px rgba(200, 180, 0, 0.5);
+        }
+
+        /* ELA entrance */
+        .ela-wrap {
+            opacity: 0;
+            transform: translateX(100px);
+            animation: slideInRight 0.8s ease forwards 0.2s;
+        }
+
+        .ela-wrap img {
+            animation: idle 2s ease-in-out infinite;
+        }
+
+        @keyframes slideInRight {
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes idle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* YAM - hidden initially */
+        .yam-wrap {
+            opacity: 0;
+            transform: translateX(-100px) scale(0.5);
+            cursor: pointer;
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .yam-wrap.visible {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+        }
+
+        .yam-wrap img {
+            filter: grayscale(0.8) brightness(0.5);
+            transition: filter 0.5s, box-shadow 0.5s;
+        }
+
+        .yam-wrap.visible img {
+            filter: grayscale(0) brightness(1);
+            animation: idle 2s ease-in-out infinite;
+            animation-delay: 0.5s;
+        }
+
+        /* Click hint */
+        .click-hint {
+            position: absolute;
+            bottom: -2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.6rem;
+            color: rgba(255, 255, 255, 0.4);
+            animation: blink 1.2s ease-in-out infinite;
+            white-space: nowrap;
+        }
+
+        .click-hint.hidden { display: none; }
+
+        @keyframes blink {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        /* YAM response bubble */
+        .yam-bubble {
+            position: relative;
+            background: rgba(255, 34, 0, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 34, 0, 0.3);
+            border-radius: 20px;
+            padding: 1.5rem 2rem;
+            margin-top: 2rem;
+            font-family: 'Press Start 2P', monospace;
+            font-size: clamp(0.8rem, 2.5vw, 1.2rem);
+            line-height: 2;
+            color: #ff2200;
+            text-shadow: 0 0 10px rgba(255, 34, 0, 0.5);
+            opacity: 0;
+            transform: scale(0.5);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        .yam-bubble.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .yam-bubble::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 15px solid rgba(255, 34, 0, 0.15);
+        }
+
+        /* Explosion confetti */
+        .confetti-burst {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            opacity: 0;
+        }
+
+        .confetti-piece.go {
+            animation: confetti-explode 1.5s ease-out forwards;
+        }
+
+        @keyframes confetti-explode {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) rotate(0deg) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty)) rotate(720deg) scale(0.3);
+            }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Shake */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10% { transform: translateX(-8px) rotate(-2deg); }
+            30% { transform: translateX(8px) rotate(2deg); }
+            50% { transform: translateX(-6px) rotate(-1deg); }
+            70% { transform: translateX(6px) rotate(1deg); }
+            90% { transform: translateX(-3px); }
+        }
+
+        .shake {
+            animation: shake 0.6s ease;
+        }
+
+        /* Navigate button */
+        .next-btn {
+            display: none;
+            margin-top: 2rem;
+            padding: 1rem 2.5rem;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.8rem;
+            background: linear-gradient(135deg, #6633ff, #ff2200);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            animation: pulse 1.5s ease-in-out infinite;
+            transition: transform 0.2s;
+        }
+
+        .next-btn:hover { transform: scale(1.1); }
+
+        .next-btn.visible { display: inline-block; }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 10px rgba(102, 51, 255, 0.5); }
+            50% { box-shadow: 0 0 25px rgba(255, 34, 0, 0.7); }
+        }
+
+        /* Floating particles */
+        .bg-particles {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float-up linear infinite;
+            opacity: 0.4;
+        }
+
+        @keyframes float-up {
+            0% { transform: translateY(100vh); opacity: 0; }
+            10% { opacity: 0.4; }
+            90% { opacity: 0.4; }
+            100% { transform: translateY(-10vh); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-particles" id="particles"></div>
+    <div class="confetti-burst" id="confetti"></div>
+
+    <div class="scene" style="position:relative; z-index:1;">
+        <div class="speech-bubble" id="elaBubble">
+            Yam, want to make a birthday together?
+        </div>
+
+        <div class="characters">
+            <div class="character yam-wrap" id="yamWrap">
+                <img src="Yam pixel art.png" alt="Yam">
+                <span class="character-name">YAM</span>
+                <span class="click-hint" id="clickHint">click me</span>
+            </div>
+
+            <div class="character ela-wrap">
+                <img src="Ela pixel art.png" alt="Ela">
+                <span class="character-name">ELA</span>
+            </div>
+        </div>
+
+        <div class="yam-bubble" id="yamBubble">
+            Let's Do This Shit!
+        </div>
+
+        <button class="next-btn" id="nextBtn" onclick="window.location.href='index.html'">
+            !יאללה
+        </button>
+    </div>
+
+    <script>
+        const yamWrap = document.getElementById('yamWrap');
+        const yamBubble = document.getElementById('yamBubble');
+        const clickHint = document.getElementById('clickHint');
+        const nextBtn = document.getElementById('nextBtn');
+        const confettiContainer = document.getElementById('confetti');
+
+        // Show Yam (greyed out) after ELA speaks
+        setTimeout(() => {
+            yamWrap.classList.add('visible');
+        }, 1500);
+
+        // Click on Yam
+        yamWrap.addEventListener('click', () => {
+            if (yamBubble.classList.contains('visible')) return;
+
+            // Hide hint
+            clickHint.classList.add('hidden');
+
+            // Shake effect
+            yamWrap.classList.add('shake');
+            setTimeout(() => yamWrap.classList.remove('shake'), 600);
+
+            // Show Yam's response
+            setTimeout(() => {
+                yamBubble.classList.add('visible');
+                launchConfetti();
+
+                // Show next button
+                setTimeout(() => {
+                    nextBtn.classList.add('visible');
+                }, 1000);
+            }, 400);
+        });
+
+        // Confetti burst
+        function launchConfetti() {
+            const colors = ['#00ff66', '#c8b400', '#ff2200', '#6633ff', '#ff69b4', '#ffd700'];
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+
+            for (let i = 0; i < 60; i++) {
+                const piece = document.createElement('div');
+                piece.classList.add('confetti-piece');
+                const angle = (Math.PI * 2 * i) / 60;
+                const distance = 200 + Math.random() * 400;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance - 200;
+                piece.style.setProperty('--tx', tx + 'px');
+                piece.style.setProperty('--ty', ty + 'px');
+                piece.style.left = centerX + 'px';
+                piece.style.top = centerY + 'px';
+                piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                piece.style.width = (Math.random() * 10 + 5) + 'px';
+                piece.style.height = (Math.random() * 10 + 5) + 'px';
+                confettiContainer.appendChild(piece);
+
+                setTimeout(() => piece.classList.add('go'), 50 + Math.random() * 200);
+            }
+        }
+
+        // Background particles
+        const particlesContainer = document.getElementById('particles');
+        const pColors = ['#00ff66', '#c8b400', '#ff2200', '#6633ff'];
+        for (let i = 0; i < 20; i++) {
+            const p = document.createElement('div');
+            p.classList.add('particle');
+            const size = Math.random() * 8 + 3;
+            p.style.width = size + 'px';
+            p.style.height = size + 'px';
+            p.style.background = pColors[Math.floor(Math.random() * pColors.length)];
+            p.style.left = Math.random() * 100 + '%';
+            p.style.animationDuration = (Math.random() * 8 + 6) + 's';
+            p.style.animationDelay = (Math.random() * 10) + 's';
+            particlesContainer.appendChild(p);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="128" height="128" shape-rendering="crispEdges">
+  <!-- Hair top -->
+  <rect x="10" y="1" width="2" height="2" fill="#3B2314"/>
+  <rect x="12" y="1" width="2" height="2" fill="#3B2314"/>
+  <rect x="14" y="1" width="2" height="2" fill="#3B2314"/>
+  <rect x="16" y="1" width="2" height="2" fill="#3B2314"/>
+  <rect x="18" y="1" width="2" height="2" fill="#3B2314"/>
+
+  <rect x="8" y="3" width="2" height="2" fill="#3B2314"/>
+  <rect x="10" y="3" width="2" height="2" fill="#4A2E1A"/>
+  <rect x="12" y="3" width="2" height="2" fill="#3B2314"/>
+  <rect x="14" y="3" width="2" height="2" fill="#4A2E1A"/>
+  <rect x="16" y="3" width="2" height="2" fill="#3B2314"/>
+  <rect x="18" y="3" width="2" height="2" fill="#4A2E1A"/>
+  <rect x="20" y="3" width="2" height="2" fill="#3B2314"/>
+  <rect x="22" y="3" width="2" height="2" fill="#3B2314"/>
+
+  <!-- Messy curly hair row -->
+  <rect x="6" y="5" width="2" height="2" fill="#3B2314"/>
+  <rect x="8" y="5" width="2" height="2" fill="#4A2E1A"/>
+  <rect x="10" y="5" width="2" height="2" fill="#3B2314"/>
+  <rect x="12" y="5" width="2" height="2" fill="#4A2E1A"/>
+  <rect x="14" y="5" width="2" height="2" fill="#3B2314"/>
+  <rect x="16" y="5" width="2" height="2" fill="#4A2E1A"/>
+  <rect x="18" y="5" width="2" height="2" fill="#3B2314"/>
+  <rect x="20" y="5" width="2" height="2" fill="#4A2E1A"/>
+  <rect x="22" y="5" width="2" height="2" fill="#3B2314"/>
+  <rect x="24" y="5" width="2" height="2" fill="#3B2314"/>
+
+  <!-- Forehead + hair sides -->
+  <rect x="6" y="7" width="2" height="2" fill="#3B2314"/>
+  <rect x="8" y="7" width="2" height="2" fill="#3B2314"/>
+  <rect x="10" y="7" width="2" height="2" fill="#E8B887"/>
+  <rect x="12" y="7" width="2" height="2" fill="#E8B887"/>
+  <rect x="14" y="7" width="2" height="2" fill="#E8B887"/>
+  <rect x="16" y="7" width="2" height="2" fill="#E8B887"/>
+  <rect x="18" y="7" width="2" height="2" fill="#E8B887"/>
+  <rect x="20" y="7" width="2" height="2" fill="#E8B887"/>
+  <rect x="22" y="7" width="2" height="2" fill="#3B2314"/>
+  <rect x="24" y="7" width="2" height="2" fill="#3B2314"/>
+
+  <!-- Eyes row -->
+  <rect x="6" y="9" width="2" height="2" fill="#3B2314"/>
+  <rect x="8" y="9" width="2" height="2" fill="#E8B887"/>
+  <rect x="10" y="9" width="2" height="2" fill="#E8B887"/>
+  <rect x="12" y="9" width="2" height="2" fill="#5C3A1E"/>
+  <rect x="14" y="9" width="2" height="2" fill="#E8B887"/>
+  <rect x="16" y="9" width="2" height="2" fill="#E8B887"/>
+  <rect x="18" y="9" width="2" height="2" fill="#5C3A1E"/>
+  <rect x="20" y="9" width="2" height="2" fill="#E8B887"/>
+  <rect x="22" y="9" width="2" height="2" fill="#E8B887"/>
+  <rect x="24" y="9" width="2" height="2" fill="#3B2314"/>
+
+  <!-- Nose + cheeks -->
+  <rect x="6" y="11" width="2" height="2" fill="#3B2314"/>
+  <rect x="8" y="11" width="2" height="2" fill="#E8B887"/>
+  <rect x="10" y="11" width="2" height="2" fill="#E8B887"/>
+  <rect x="12" y="11" width="2" height="2" fill="#E8B887"/>
+  <rect x="14" y="11" width="2" height="2" fill="#D4956B"/>
+  <rect x="16" y="11" width="2" height="2" fill="#D4956B"/>
+  <rect x="18" y="11" width="2" height="2" fill="#E8B887"/>
+  <rect x="20" y="11" width="2" height="2" fill="#E8B887"/>
+  <rect x="22" y="11" width="2" height="2" fill="#E8B887"/>
+  <rect x="24" y="11" width="2" height="2" fill="#3B2314"/>
+
+  <!-- Big smile row -->
+  <rect x="6" y="13" width="2" height="2" fill="#6B4226"/>
+  <rect x="8" y="13" width="2" height="2" fill="#6B4226"/>
+  <rect x="10" y="13" width="2" height="2" fill="#E8B887"/>
+  <rect x="12" y="13" width="2" height="2" fill="#FFFFFF"/>
+  <rect x="14" y="13" width="2" height="2" fill="#FFFFFF"/>
+  <rect x="16" y="13" width="2" height="2" fill="#FFFFFF"/>
+  <rect x="18" y="13" width="2" height="2" fill="#FFFFFF"/>
+  <rect x="20" y="13" width="2" height="2" fill="#E8B887"/>
+  <rect x="22" y="13" width="2" height="2" fill="#6B4226"/>
+  <rect x="24" y="13" width="2" height="2" fill="#6B4226"/>
+
+  <!-- Beard row 1 -->
+  <rect x="6" y="15" width="2" height="2" fill="#6B4226"/>
+  <rect x="8" y="15" width="2" height="2" fill="#7B5230"/>
+  <rect x="10" y="15" width="2" height="2" fill="#6B4226"/>
+  <rect x="12" y="15" width="2" height="2" fill="#7B5230"/>
+  <rect x="14" y="15" width="2" height="2" fill="#6B4226"/>
+  <rect x="16" y="15" width="2" height="2" fill="#7B5230"/>
+  <rect x="18" y="15" width="2" height="2" fill="#6B4226"/>
+  <rect x="20" y="15" width="2" height="2" fill="#7B5230"/>
+  <rect x="22" y="15" width="2" height="2" fill="#6B4226"/>
+  <rect x="24" y="15" width="2" height="2" fill="#6B4226"/>
+
+  <!-- Beard row 2 / chin -->
+  <rect x="8" y="17" width="2" height="2" fill="#6B4226"/>
+  <rect x="10" y="17" width="2" height="2" fill="#7B5230"/>
+  <rect x="12" y="17" width="2" height="2" fill="#6B4226"/>
+  <rect x="14" y="17" width="2" height="2" fill="#7B5230"/>
+  <rect x="16" y="17" width="2" height="2" fill="#6B4226"/>
+  <rect x="18" y="17" width="2" height="2" fill="#7B5230"/>
+  <rect x="20" y="17" width="2" height="2" fill="#6B4226"/>
+  <rect x="22" y="17" width="2" height="2" fill="#6B4226"/>
+
+  <!-- Neck -->
+  <rect x="12" y="19" width="2" height="2" fill="#E8B887"/>
+  <rect x="14" y="19" width="2" height="2" fill="#E8B887"/>
+  <rect x="16" y="19" width="2" height="2" fill="#E8B887"/>
+  <rect x="18" y="19" width="2" height="2" fill="#E8B887"/>
+
+  <!-- Grey scarf row 1 -->
+  <rect x="6" y="21" width="2" height="2" fill="#8E8E9E"/>
+  <rect x="8" y="21" width="2" height="2" fill="#A0A0B0"/>
+  <rect x="10" y="21" width="2" height="2" fill="#8E8E9E"/>
+  <rect x="12" y="21" width="2" height="2" fill="#A0A0B0"/>
+  <rect x="14" y="21" width="2" height="2" fill="#8E8E9E"/>
+  <rect x="16" y="21" width="2" height="2" fill="#A0A0B0"/>
+  <rect x="18" y="21" width="2" height="2" fill="#8E8E9E"/>
+  <rect x="20" y="21" width="2" height="2" fill="#A0A0B0"/>
+  <rect x="22" y="21" width="2" height="2" fill="#8E8E9E"/>
+
+  <!-- Grey scarf row 2 -->
+  <rect x="6" y="23" width="2" height="2" fill="#A0A0B0"/>
+  <rect x="8" y="23" width="2" height="2" fill="#7A7A8A"/>
+  <rect x="10" y="23" width="2" height="2" fill="#A0A0B0"/>
+  <rect x="12" y="23" width="2" height="2" fill="#7A7A8A"/>
+  <rect x="14" y="23" width="2" height="2" fill="#A0A0B0"/>
+  <rect x="16" y="23" width="2" height="2" fill="#7A7A8A"/>
+  <rect x="18" y="23" width="2" height="2" fill="#A0A0B0"/>
+  <rect x="20" y="23" width="2" height="2" fill="#7A7A8A"/>
+  <rect x="22" y="23" width="2" height="2" fill="#A0A0B0"/>
+
+  <!-- Grey scarf row 3 -->
+  <rect x="6" y="25" width="2" height="2" fill="#8E8E9E"/>
+  <rect x="8" y="25" width="2" height="2" fill="#A0A0B0"/>
+  <rect x="10" y="25" width="2" height="2" fill="#8E8E9E"/>
+  <rect x="12" y="25" width="2" height="2" fill="#A0A0B0"/>
+  <rect x="14" y="25" width="2" height="2" fill="#8E8E9E"/>
+  <rect x="16" y="25" width="2" height="2" fill="#A0A0B0"/>
+  <rect x="18" y="25" width="2" height="2" fill="#8E8E9E"/>
+  <rect x="20" y="25" width="2" height="2" fill="#A0A0B0"/>
+  <rect x="22" y="25" width="2" height="2" fill="#8E8E9E"/>
+</svg>
