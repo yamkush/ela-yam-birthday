@@ -3,7 +3,7 @@
 
 const CONFIG = {
     // Main title (green text)
-    title: "יום הולדת",
+    title:  "Yam Kushinsky VS Ella Mizrachi",
 
     // Subtitle (yellow text)
     subtitle: "מסיבת חצר",
@@ -15,7 +15,7 @@ const CONFIG = {
     bottomText: "איפה? מושב עופר",
 
     // Time text (below bottom text)
-    timeText: "12:00-24:00",
+    timeText: "14:00-23:00",
 
     // Countdown target date (YYYY-MM-DD format)
     countdownDate: "2026-05-02",
