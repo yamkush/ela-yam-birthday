@@ -502,6 +502,21 @@
             musicBtn.textContent = isPlaying ? '🔊' : '🔇';
             musicBtn.classList.toggle('playing', isPlaying);
         });
+
+        // Autoplay on first user interaction (browsers require a gesture)
+        function startMusicOnce() {
+            if (!Music.isPlaying()) {
+                Music.play();
+                musicBtn.textContent = '🔊';
+                musicBtn.classList.add('playing');
+            }
+            document.removeEventListener('click', startMusicOnce);
+            document.removeEventListener('touchstart', startMusicOnce);
+            document.removeEventListener('keydown', startMusicOnce);
+        }
+        document.addEventListener('click', startMusicOnce);
+        document.addEventListener('touchstart', startMusicOnce);
+        document.addEventListener('keydown', startMusicOnce);
     </script>
 </body>
 </html>

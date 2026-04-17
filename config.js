@@ -3,7 +3,7 @@
 
 const CONFIG = {
     // Main title (green text)
-    title:  "Yam Kushinsky VS Ella Mizrachi",
+    title:  "יומ הולדת",
 
     // Subtitle (yellow text)
     subtitle: "מסיבת חצר",

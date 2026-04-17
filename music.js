@@ -182,7 +182,7 @@ const Music = (() => {
         if (playing) return;
         ctx = new (window.AudioContext || window.webkitAudioContext)();
         masterGain = ctx.createGain();
-        masterGain.gain.value = 0.7;
+        masterGain.gain.value = 0.175;
         masterGain.connect(ctx.destination);
         playing = true;
 
